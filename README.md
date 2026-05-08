@@ -1,6 +1,6 @@
 # 🔐 Random Password Generator
 
-A clean and responsive **Random Password Generator** built with pure **HTML**, **CSS**, and **JavaScript**. Instantly generate strong and secure passwords containing uppercase letters, lowercase letters, numbers, and symbols with one click.
+A clean and minimal random password generator built with pure **HTML**, **CSS**, and **JavaScript** — instantly generates strong 12-character passwords with uppercase, lowercase, numbers, and symbols, with one-click copy support.
 
 ---
 
@@ -12,111 +12,99 @@ A clean and responsive **Random Password Generator** built with pure **HTML**, *
 
 ## ✨ Features
 
-* 🔑 Generate secure random passwords
-* 🔠 Includes uppercase & lowercase letters
-* 🔢 Includes numbers
-* 🔣 Includes special symbols
-* 📋 One-click copy to clipboard
-* 🎨 Modern and minimal UI design
-* ⚡ Fast and lightweight
+- ⚡ Instantly generates a strong 12-character password
+- 🔠 Includes uppercase, lowercase, numbers & symbols
+- 🔀 Shuffled characters for true randomness
+- 📋 One-click copy to clipboard
+- 🎨 Dark navy & green minimal design
+- 📱 Clean, responsive layout
 
 ---
 
 ## 📁 Project Structure
 
-```txt id="j3x2ma"
+```
 PasswordGenerator/
-├── index.html
-├── style.css
-├── script.js
-├── preview.png
+├── index.html        # Markup & structure
+├── style.css         # Styling & layout
+├── script.js         # Password generation & copy logic
+├── preview.png       # Screenshot for README
 └── images/
-    ├── copy.png
-    └── generate.png
+    ├── copy.png      # Copy icon
+    └── generate.png  # Generate button icon
 ```
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/your-username/password-generator.git
+   cd password-generator
+   ```
 
-```bash id="7s8fpm"
-git clone https://github.com/your-username/password-generator.git
-```
-
-### 2. Open the project folder
-
-```bash id="z9e4h1"
-cd password-generator
-```
-
-### 3. Run the project
-
-Simply open `index.html` in your browser.
+2. **Open in browser**
+   ```bash
+   # No setup needed — just open index.html directly
+   ```
 
 ---
 
-## ⚙️ How It Works
+## 🛠️ How It Works
 
-The password generator:
+The password is built by guaranteeing at least one character from each category, then filling the rest randomly from the combined character set. The final string is shuffled so the guaranteed characters don't always appear at the start.
 
-* Ensures at least:
+```js
+// Guarantee one of each type
+password += upperCase[Math.floor(Math.random() * upperCase.length)];
+password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+password += number[Math.floor(Math.random() * number.length)];
+password += symbol[Math.floor(Math.random() * symbol.length)];
 
-  * 1 uppercase letter
-  * 1 lowercase letter
-  * 1 number
-  * 1 symbol
-* Randomly fills the remaining characters
-* Shuffles the final password for better randomness
+// Fill remaining length from all characters
+while (length > password.length) {
+  password += allChars[Math.floor(Math.random() * allChars.length)];
+}
 
-Default password length:
-
-```js id="9l7qwe"
-const length = 12;
-```
-
-You can change the password length by updating this value in `script.js`.
-
----
-
-## 📋 Copy Password
-
-Click the copy icon to copy the generated password to your clipboard instantly
-
-```js id="m2v8na"
-navigator.clipboard.writeText(passwordBox.value);
+// Shuffle so guaranteed chars aren't always first
+passwordBox.value = shuffleString(password);
 ```
 
 ---
 
-## 🎨 Styling Highlights
+## 🛠️ Customization
 
-| Feature      | Detail                           |
-| ------------ | -------------------------------- |
-| Background   | Dark navy blue theme             |
-| Accent Color | Green (`#019f55`)                |
-| Layout       | Responsive centered container    |
-| Buttons      | Modern flex alignment with icons |
-| Password Box | Clean white contrast card        |
+### Change password length
+In `script.js`, update the `length` variable:
+```js
+const length = 16; // default is 12
+```
+
+### Remove symbols from password
+In `script.js`, remove `symbol` from `allChars`:
+```js
+const allChars = upperCase + lowerCase + number;
+// and remove: password += symbol[...]
+```
+
+### Change accent color
+In `style.css`, replace `#019f55` with your preferred color:
+```css
+.container h1 span { color: #019f55; border-bottom: 4px solid #019f55; }
+.container button  { background: #019f55; }
+```
 
 ---
 
-## 🛠️ Technologies Used
+## 🎨 Color Palette
 
-* HTML5
-* CSS3
-* JavaScript (Vanilla JS)
-
----
-
-## 💡 Future Improvements
-
-* 🔢 Custom password length slider
-* ☑️ Toggle symbols/numbers
-* 👁️ Show/hide password
-* 📱 Improved mobile responsiveness
-* 🔔 Copy success notification
+| Element | Color |
+|---------|-------|
+| Background | `#002339` — Deep Navy |
+| Accent | `#019f55` — Emerald Green |
+| Text | `#ffffff` — White |
+| Input background | `#ffffff` — White |
 
 ---
 
@@ -124,4 +112,4 @@ navigator.clipboard.writeText(passwordBox.value);
 
 **Kaneeza Batool**
 CS Undergraduate · Sukkur, Pakistan
-Built with 🔐 using HTML, CSS & JavaScript
+Built with 🔐 using HTML, CSS & JS
